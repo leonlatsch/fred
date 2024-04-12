@@ -1,0 +1,26 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*"
+
+permissions: write-all
+
+jobs:
+  publish:
+    name: Build and Upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Build Executable
+        run: export GIN_MODE=release && go build -o fred
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: fred-x86-linux
+          path: fred
