@@ -15,7 +15,10 @@ func SetupWebServer(port int) {
 type HotReloadFileServer struct{}
 
 func (handler *HotReloadFileServer) ServeHTTP(writer http.ResponseWriter, req *http.Request) {
-	writer.Write([]byte(clientWebsocketCode))
+	if req.Method == http.MethodGet {
+		writer.Write([]byte(clientWebsocketCode))
+	}
+
 	fs := http.FileServer(http.Dir("."))
 	fs.ServeHTTP(writer, req)
 }
