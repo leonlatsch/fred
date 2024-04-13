@@ -26,5 +26,5 @@ jobs:
           path: fred
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "fred-x86-linux"
+          artifacts: "*"
           generateReleaseNotes: true
