@@ -17,14 +17,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Executable
-        run: export GIN_MODE=release && go build -o fred
+        run: go build -o fred
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: fred-x86-linux
-          path: fred
+          name: fred
+          path: fred-x86-linux
+
+      - name: Zip for release
+        run: zip fred-x86-linux.zip fred
+
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "*"
+          artifacts: "*.zip"
           generateReleaseNotes: true
