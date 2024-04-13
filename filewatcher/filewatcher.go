@@ -2,7 +2,6 @@ package filewatcher
 
 import (
 	"io/fs"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -25,11 +24,9 @@ func WatchFiles(onChange func(name string)) {
 		case fsnotify.Create:
 			stat, err := os.Stat(event.Name)
 			if err == nil && stat.IsDir() {
-				log.Println("Created " + event.Name)
 				watcher.Add(event.Name)
 			}
 		case fsnotify.Remove:
-			log.Println("Deleted " + event.Name)
 			watcher.Remove(event.Name)
 		}
 
@@ -41,7 +38,7 @@ func watchDirs(path string) {
 	watcher.Add(path)
 	filepath.WalkDir(path, func(childPath string, d fs.DirEntry, err error) error {
 		if strings.HasPrefix(childPath, ".") {
-			return nil
+			return filepath.SkipDir
 		}
 
 		if d.IsDir() {
