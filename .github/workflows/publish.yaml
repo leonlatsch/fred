@@ -24,15 +24,7 @@ jobs:
         with:
           name: fred-x86-linux
           path: fred
-  release:
-    name: Create GitHub release
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "fred-x86-linux"
-          draft: true
+          generateReleaseNotes: true
