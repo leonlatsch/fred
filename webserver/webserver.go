@@ -11,6 +11,6 @@ import (
 func SetupWebServer() {
 	ginRouter := gin.New()
 	ginRouter.Static("", ".")
-	http.ListenAndServe(":8000", &jsinject.WsInjectorMiddleware{Next: ginRouter})
 	log.Println("fred now serving at http://localhost:8000")
+	http.ListenAndServe(":8000", &jsinject.WsInjectorMiddleware{Next: ginRouter})
 }

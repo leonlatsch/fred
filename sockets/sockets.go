@@ -24,7 +24,6 @@ func SetupSockets() {
 			return
 		}
 
-		log.Println("Websocket connected")
 		CurrentSocket = websocket
 	})
 
