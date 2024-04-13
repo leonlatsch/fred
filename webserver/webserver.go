@@ -1,13 +1,15 @@
 package webserver
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
 
-func SetupWebServer() {
-	log.Println("fred now serving at http://localhost:8000")
-	http.ListenAndServe(":8000", &HotReloadFileServer{})
+func SetupWebServer(port int) {
+	addr := fmt.Sprintf(":%d", port)
+	log.Println("fred now serving at http://localhost" + addr)
+	http.ListenAndServe(addr, &HotReloadFileServer{})
 }
 
 type HotReloadFileServer struct{}

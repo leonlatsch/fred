@@ -1,5 +1,6 @@
 # todos
 
-- [ ] Ged rid of gin-gonic
-- [ ] Add command line arguments: port, directory
+- [x] Ged rid of gin-gonic
+- [x] Add command line arguments: port, directory
+- [ ] Fix superflous response.WriteHeader call
 
